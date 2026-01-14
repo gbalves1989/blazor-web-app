@@ -1,0 +1,15 @@
+C:\Users\gbalv\source\repos\blazor-web-app\Database\bin\Debug\net10.0\Database.deps.json
+C:\Users\gbalv\source\repos\blazor-web-app\Database\bin\Debug\net10.0\Database.runtimeconfig.json
+C:\Users\gbalv\source\repos\blazor-web-app\Database\bin\Debug\net10.0\Database.dll
+C:\Users\gbalv\source\repos\blazor-web-app\Database\bin\Debug\net10.0\Database.pdb
+C:\Users\gbalv\source\repos\blazor-web-app\Database\obj\Debug\net10.0\Database.csproj.AssemblyReference.cache
+C:\Users\gbalv\source\repos\blazor-web-app\Database\obj\Debug\net10.0\Database.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\gbalv\source\repos\blazor-web-app\Database\obj\Debug\net10.0\Database.AssemblyInfoInputs.cache
+C:\Users\gbalv\source\repos\blazor-web-app\Database\obj\Debug\net10.0\Database.AssemblyInfo.cs
+C:\Users\gbalv\source\repos\blazor-web-app\Database\obj\Debug\net10.0\Database.csproj.CoreCompileInputs.cache
+C:\Users\gbalv\source\repos\blazor-web-app\Database\obj\Debug\net10.0\Database.sourcelink.json
+C:\Users\gbalv\source\repos\blazor-web-app\Database\obj\Debug\net10.0\Database.dll
+C:\Users\gbalv\source\repos\blazor-web-app\Database\obj\Debug\net10.0\refint\Database.dll
+C:\Users\gbalv\source\repos\blazor-web-app\Database\obj\Debug\net10.0\Database.pdb
+C:\Users\gbalv\source\repos\blazor-web-app\Database\obj\Debug\net10.0\Database.genruntimeconfig.cache
+C:\Users\gbalv\source\repos\blazor-web-app\Database\obj\Debug\net10.0\ref\Database.dll
