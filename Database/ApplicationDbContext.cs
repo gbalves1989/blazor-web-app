@@ -1,8 +1,5 @@
 ﻿using Database.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Database
 {
@@ -12,5 +9,15 @@ namespace Database
         : base(options) { }
 
         public DbSet<Category> Categories => Set<Category>();
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Category>(entity =>
+            {
+                entity.HasIndex(e => e.Name).IsUnique();
+            });
+        }
     }
 }
