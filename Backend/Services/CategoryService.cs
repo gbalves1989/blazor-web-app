@@ -3,7 +3,6 @@ using Backend.Dtos.Responses;
 using Backend.Services.Interfaces;
 using Database.Interfaces;
 using Database.Models;
-using Microsoft.Data.SqlClient;
 
 namespace Backend.Services
 {
@@ -20,6 +19,13 @@ namespace Backend.Services
         {
             try
             {
+                Category? categoryExists = await _categoryRepository.GetByNameAsync(categoryRequest.Name);
+
+                if (categoryExists != null)
+                {
+                    return ApiResponse<Category>.Conflict("Já existe uma categoria com esse nome.");
+                }
+
                 Category newCategory = new Category
                 {
                     Name = categoryRequest.Name,
@@ -29,37 +35,58 @@ namespace Backend.Services
 
                 return ApiResponse<Category>.Created(createdCategory, "Categoria criada com sucesso.");
             }
-            catch (SqlException ex)
+            catch (Exception ex)
             {
-                if (ex.Number == 2601)
-                {
-                    return ApiResponse<Category>.Conflict("Nome da categoria já está cadastrado."); 
-                }
-                else
-                {
-                    return ApiResponse<Category>.InternalServerError("Problema ao tentar cadastrar uma categoria.");
-                }
+                return ApiResponse<Category>.InternalServerError("Problema ao tentar cadastrar uma categoria.");
             }
         }
 
-        public Task<ApiResponse<bool>> DeleteAsync(int id)
+        public async Task<ApiResponse<bool>> DeleteAsync(int id)
         {
-            throw new NotImplementedException();
+            Category? category = await _categoryRepository.GetByIdAsync(id);
+
+            if (category == null)
+            {
+                return ApiResponse<bool>.NotFound("Categoria não encontrada.");
+            }
+
+            await _categoryRepository.DeleteAsync(category);
+
+            return ApiResponse<bool>.NoContent(true, "Categoria removida com sucesso.");
         }
 
-        public Task<ApiResponse<IEnumerable<Category>>> GetAllAsync()
+        public async Task<ApiResponse<IEnumerable<Category>>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            IEnumerable<Category> categories = await _categoryRepository.GetAllAsync();
+
+            return ApiResponse<IEnumerable<Category>>.Ok(categories, "Categorias recuperadas com sucesso.");
         }
 
-        public Task<ApiResponse<Category?>> GetByIdAsync(int id)
+        public async Task<ApiResponse<Category?>> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            Category? category = await _categoryRepository.GetByIdAsync(id);    
+
+            if (category == null)
+            {
+                return ApiResponse<Category?>.NotFound("Categoria não encontrada.");
+            }
+
+            return ApiResponse<Category?>.Ok(category, "Categoria recuperada com sucesso.");
         }
 
-        public Task<ApiResponse<Category>> UpdateAsync(int id, CategoryRequest categoryRequest)
+        public async Task<ApiResponse<Category>> UpdateAsync(int id, CategoryRequest categoryRequest)
         {
-            throw new NotImplementedException();
+            Category? category = _categoryRepository.GetByIdAsync(id).Result;
+
+            if (category == null)
+            {
+                return ApiResponse<Category>.NotFound("Categoria não encontrada.");
+            }
+
+            category.Name = categoryRequest.Name;
+            Category updatedCategory = await _categoryRepository.UpdateAsync(category);
+
+            return ApiResponse<Category>.Accept(updatedCategory, "Categoria atualizada com sucesso.");
         }
     }
 }
